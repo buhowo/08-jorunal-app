@@ -2,7 +2,8 @@ import React from 'react'
 import {
   BrowserRouter as Router,
   Switch,
-  Route
+  Route,
+  Redirect
 } from 'react-router-dom';
 
 import { JournalScreen } from '../components/journal/JournalScreen';
@@ -14,21 +15,10 @@ export const AppRouter = () => {
       <div>
         <Switch>
 
-          <Route
-            to="/auth"
-            component={AuthRouter}
-          >
-            Home
-          </Route>
+          <Route path='/auth' component={AuthRouter} /> 
 
-          <Route
-            to="/"
-            exact
-            component={JournalScreen}
-          >
-            Main Route
-          </Route>
-
+          <Route path='/' exact component={JournalScreen}/>
+          <Redirect to= 'auth/login'/>
         </Switch>
       </div>
     </Router>

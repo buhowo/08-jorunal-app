@@ -1,10 +1,11 @@
 import React from 'react';
-
-import {  } from './routers'
+import { AppRouter } from './routers/AppRouter'
 
 export const JournalApp = () => {
 
   return (
-    <AppRouter/>
+    <>
+      <AppRouter />
+    </>
   )
 }
