@@ -11,7 +11,7 @@ export const JournalScreen = () => {
 
       <main>
         {/* <NothingSelected /> */}
-        <NoteScreen/>
+        <NoteScreen />
       </main>
 
     </div>

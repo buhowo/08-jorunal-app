@@ -4,10 +4,10 @@ import {
   Switch,
   Route,
   Redirect
-} from 'react-router-dom';
+} from 'react-router-dom'
 
-import { JournalScreen } from '../components/journal/JournalScreen';
-import { AuthRouter } from './AuthRouter';
+import { JournalScreen } from '../components/journal/JournalScreen'
+import { AuthRouter } from './AuthRouter'
 
 export const AppRouter = () => {
   return (
@@ -15,12 +15,12 @@ export const AppRouter = () => {
       <div>
         <Switch>
 
-          <Route path='/auth' component={AuthRouter} /> 
+          <Route path='/auth' component={AuthRouter} />
 
-          <Route path='/' exact component={JournalScreen}/>
-          <Redirect to= 'auth/login'/>
+          <Route path='/' exact component={JournalScreen} />
+          <Redirect to='auth/login' />
         </Switch>
       </div>
     </Router>
-  );
+  )
 }

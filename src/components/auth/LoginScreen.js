@@ -1,29 +1,26 @@
 import React from 'react'
-import { useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
-import { startGoogleLogin, startLoginEmailPassword } from '../../actions/auth';
-import { useForm } from '../../hooks/useForm';
-
-
+import { useDispatch } from 'react-redux'
+import { Link } from 'react-router-dom'
+import { startGoogleLogin, startLoginEmailPassword } from '../../actions/auth'
+import { useForm } from '../../hooks/useForm'
 
 export const LoginScreen = () => {
+  const dispatch = useDispatch()
 
-  const dispatch = useDispatch();
-
-  const [formValues, handleInputChange,] = useForm({
+  const [formValues, handleInputChange] = useForm({
     email: 'Sergio@gmail.com',
-    password: '123456',
+    password: '123456'
   })
 
-  const { email, password } = formValues;
+  const { email, password } = formValues
 
   const handleGoogleLogin = () => {
-    dispatch(startGoogleLogin());
-  };
+    dispatch(startGoogleLogin())
+  }
 
   const handleLogin = (e) => {
-    e.preventDefault();
-    dispatch(startLoginEmailPassword(12345, 'Raul'));
+    e.preventDefault()
+    dispatch(startLoginEmailPassword(12345, 'Raul'))
   }
   return (
     <>
@@ -47,7 +44,8 @@ export const LoginScreen = () => {
           value={password}
           onChange={handleInputChange}
         />
-        <button className='btn btn-primary btn-block '
+        <button
+          className='btn btn-primary btn-block '
           type='submit'
         >
           Login
@@ -56,15 +54,15 @@ export const LoginScreen = () => {
         <div className='auth__social-networks'>
           <p>Login with social networks</p>
           <div
-            className="google-btn"
+            className='google-btn'
             onClick={handleGoogleLogin}
           >
             <div
-              className="google-icon-wrapper"
+              className='google-icon-wrapper'
             >
-              <img className="google-icon" src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" alt="google button" />
+              <img className='google-icon' src='https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg' alt='google button' />
             </div>
-            <p className="btn-text">
+            <p className='btn-text'>
               <b>Sign in with google</b>
             </p>
           </div>

@@ -2,7 +2,7 @@ import React from 'react'
 
 export const NotesAppBar = () => {
   return (
-    <div className="notes__appbar">
+    <div className='notes__appbar'>
       <span>11 de Agosto del 2021</span>
 
       <div>

@@ -1,4 +1,4 @@
-import { types } from "../types/types";
+import { types } from '../types/types'
 
 export const authReducer = (state = {}, action) => {
   switch (action.type) {
@@ -13,7 +13,6 @@ export const authReducer = (state = {}, action) => {
       return {}
 
     default:
-      return state;
-
+      return state
   }
 }
