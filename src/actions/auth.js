@@ -1,6 +1,5 @@
-import {
-  types
-} from '../types/types'
+import Swal from 'sweetalert2'
+import { types } from '../types/types'
 import {
   firebase,
   googleAuthProvider
@@ -22,16 +21,16 @@ export const startLoginEmailPassword = (email, password) => {
 
       })
       .catch((err) => {
-        console.error(err);
         dispatch(finishLoading())
+        Swal.fire('Error', err.message, 'error')
       })
-
+      
+    }
   }
-}
-
-export const startRegisterWithEmailPasswordName = (email, password, name) => {
-  return (dispatch) => {
-    firebase.auth().createUserWithEmailAndPassword(email, password)
+  
+  export const startRegisterWithEmailPasswordName = (email, password, name) => {
+    return (dispatch) => {
+      firebase.auth().createUserWithEmailAndPassword(email, password)
       .then(async ({
         user
       }) => {
@@ -40,31 +39,44 @@ export const startRegisterWithEmailPasswordName = (email, password, name) => {
         })
         dispatch(
           login(user.uid, user.displayName)
-        )
-      })
-      .catch(err => {
-        console.log(err)
-      })
-  }
-}
-
-export const startGoogleLogin = () => {
-  return (dispatch) => {
-    firebase.auth().signInWithPopup(googleAuthProvider)
+          )
+        })
+        .catch(err => {
+          Swal.fire('Error', err.message, 'error')
+        })
+      }
+    }
+    
+    export const startGoogleLogin = () => {
+      return (dispatch) => {
+        firebase.auth().signInWithPopup(googleAuthProvider)
       .then(({
         user
       }) => {
         dispatch(
           login(user.uid, user.displayName)
-        )
+          )
+        })
+      }
+    }
+    
+    export const login = (uid, displayName) => ({
+      type: types.login,
+      payload: {
+        uid,
+        displayName
+      }
+    })
+    
+    export const startLogout = () => {
+      return async (dispatch) => {
+        await firebase.auth().signOut();
+        dispatch(
+          logout()
+          )
+        }
+      }
+      
+      export const logout = () => ({
+        type: types.logout,
       })
-  }
-}
-
-export const login = (uid, displayName) => ({
-  type: types.login,
-  payload: {
-    uid,
-    displayName
-  }
-})

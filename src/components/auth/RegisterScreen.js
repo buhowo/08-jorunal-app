@@ -1,3 +1,4 @@
+import Swal from 'sweetalert2'
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { useForm } from '../../hooks/useForm'
@@ -38,14 +39,15 @@ export const RegisterScreen = () => {
     dispatch(removeError())
     return true
   }
-
   return (
     <>
       {
         msgError &&
-          <div className='auth__alert-error'>
-            {msgError}
-          </div>
+        Swal.fire('Válida tus datos', msgError, 'info')
+          .then(
+            dispatch(removeError())
+          )
+
       }
 
       <h3 className='auth__title'>Register</h3>
