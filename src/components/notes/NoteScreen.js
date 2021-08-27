@@ -1,7 +1,30 @@
-import React from 'react'
+import React, { useEffect, useRef } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { activeNote } from '../../actions/notes'
+import { useForm } from '../../hooks/useForm'
 import { NotesAppBar } from './NotesAppBar'
 
 export const NoteScreen = () => {
+  const { active: note } = useSelector(state => state.notes)
+  const dispatch = useDispatch();
+  const [formValues, handleInputChange, reset] = useForm(note);
+  const { body, title } = formValues;
+  //Una constante mutable
+  const activeId = useRef(note.id)
+
+  useEffect(() => {
+    //Verificamos que el la nota activa en la referencia sea distinta a la que tenemos en el state
+    if (note.id !== activeId.current) {
+      //Cambiamos el estado con el hook useForm y useRef
+      reset(note);
+      activeId.current = note.id
+    }
+  }, [note, reset])
+
+  useEffect(() => {
+    dispatch(activeNote(formValues.id, { ...formValues }))
+  }, [dispatch, formValues])
+
   return (
     <div className='notes__main-content'>
       <NotesAppBar />
@@ -12,18 +35,25 @@ export const NoteScreen = () => {
           placeholder='Thinking about ...'
           className='note__title-input'
           autoComplete='off'
+          name="title"
+          value={title}
+          onChange={handleInputChange}
         />
         <textarea
           placeholder='What happend today'
           className='note__text-area'
+          name="body"
+          value={body}
+          onChange={handleInputChange}
         />
-        <div className='notes__image'>
-          <img
-            src='https://cdn.dribbble.com/users/650400/screenshots/16101500/media/efc7ef012ba52bd239505563b7ae56e6.jpg'
-            alt='fondo'
-          />
-        </div>
-
+        {(note.url) &&
+          <div className='notes__image'>
+            <img
+              src={`${note.url}`}
+              alt='fondo'
+            />
+          </div>
+        }
       </div>
     </div>
   )
