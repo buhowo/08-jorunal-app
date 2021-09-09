@@ -41,9 +41,8 @@
   flex: 1 1 auto;
   resize: none;
 }
-.notes__image {
-  box-shadow: 5px 5px #262626;
-  height: 25vh; 
-  display: flex;
-  width: 25vw;
+
+.notes__image img {
+  box-shadow: 5px 5px $dark-grey;
+  height: 15.625rem;
 }

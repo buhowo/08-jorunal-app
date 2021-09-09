@@ -72,8 +72,33 @@ export const startUploading = (file) => {
   return async (dispatch, getState) => {
     const { active: activeNote } = getState().notes;
 
+    Swal.fire({
+      title: 'Uploading',
+      text: 'Please wait . . .',
+      allowOutsideClick: false,
+      showConfirmButton: false,
+      willOpen: () => {
+        Swal.showLoading();
+      }
+    })
     const fileUrl = await fileUpload(file);
-    console.log(fileUrl);
+    activeNote.url = fileUrl;
 
+    dispatch(startSaveNote(activeNote))
+    Swal.close();
+  }
+
+
+}
+export const startDeleting = (id) => {
+  return async (dispatch, getState) => {
+    const { uid } = getState().auth;
+    await db.doc(`${uid}/journal/notes/${id}`).delete();
+    dispatch(deleteNote(id));
   }
 }
+
+export const deleteNote = (id) => ({
+  type: types.notesDelete,
+  payload: id,
+})
