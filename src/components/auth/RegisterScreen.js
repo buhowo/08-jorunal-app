@@ -1,4 +1,4 @@
-import Swal from 'sweetalert2'
+ import Swal from 'sweetalert2'
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { useForm } from '../../hooks/useForm'
@@ -51,7 +51,10 @@ export const RegisterScreen = () => {
       }
 
       <h3 className='auth__title'>Register</h3>
-      <form onSubmit={handleRegister}>
+      <form 
+      className="animate__animated animate__fadeIn animate__faster"
+      onSubmit={handleRegister
+      }>
         <input
           type='text'
           placeholder='Name'
